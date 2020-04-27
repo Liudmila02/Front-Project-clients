@@ -19,7 +19,7 @@ class LoginForm extends Component {
       this.props.history.push('/orders')
     })
     .catch(function (err) {
-      console.log(err.response.data);
+      console.log(err.response);
     });
   }
 
