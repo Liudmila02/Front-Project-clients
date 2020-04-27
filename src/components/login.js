@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
+import { request } from '../utils/axios'
 import { withRouter } from 'react-router'
+
+import '../style/login.css'
 
 class LoginForm extends Component {
   state = {
@@ -9,14 +12,41 @@ class LoginForm extends Component {
   handleEmailChange = event => { this.setState({ email: event.target.value })}
   handlePasswordChange = event => {this.setState({ password: event.target.value })}
 
+  handleSubmit = event => {
+    event.preventDefault();
+    request.post('/login', { email: this.state.email, password: this.state.password })
+    .then(response => {
+      this.props.history.push('/orders')
+    })
+    .catch(function (err) {
+      console.log(err.response.data);
+    });
+  }
+
   render() {
     return (
       <div>
-        <div >
-          <form className="form-group-in" onSubmit={this.handleSubmit}>
-              <input placeholder="Email Address" value={this.state.email} className="form-control inline-input" type="email" name="email" onChange={this.handleEmailChange} />
-              <input placeholder="Password" value={this.state.password} className="form-control inline-input" type="password" name="password" onChange={this.handlePasswordChange} />
-            <button className="button-signin" type="submit">Login</button>
+        <div className="form-login">
+          <form onSubmit={this.handleSubmit}>
+              <input 
+                placeholder="Email Address" 
+                value={this.state.email} 
+                type="email" 
+                name="email" 
+                className="input-email"
+                onChange={this.handleEmailChange} 
+              />
+              <br/>
+              <input 
+                placeholder="Password" 
+                value={this.state.password} 
+                type="password" 
+                name="password" 
+                className="input-password"
+                onChange={this.handlePasswordChange} 
+              />
+              <br />
+            <button className="button-signin" type="submit">Sign in</button>
           </form>
         </div>
       </div>
