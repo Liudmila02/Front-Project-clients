@@ -17,7 +17,8 @@ class HistoryForm extends Component {
     const id = this.props.match.params.id
     request.post('/history', {order_id: id, date: this.state.date, action: this.state.action })
       .then(response => {
-        console.log(response.data)
+        window.location.href=`/client/${id}/show`
+        this.props.history.push(`/client/${id}/show`)
       })
       .catch(function (err) {
         console.log(err.response);

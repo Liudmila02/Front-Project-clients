@@ -26,10 +26,11 @@ class ClientForm extends React.Component {
   const { client, project, department, estimate, budget, start_date } = this.state
     request.post('/clients', {client: client, project: project, department, estimate, budget, start_date})
      .then(response => {
+      window.location.href='/orders'
        this.props.history.push('/orders')
      })
      .catch(function (err) {
-       console.log(err.response.data);
+       console.log(err);
      });
    }
    render() {
