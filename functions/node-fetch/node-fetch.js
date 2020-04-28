@@ -15,7 +15,7 @@ exports.handler = async function(event, context) {
   console.log('Constructed URL is ...', URL)
 
   try {
-    const { data } = await axios.get(URL)
+    const { data } = await axios.get('/')
     // refer to axios docs for other methods if you need them
     // for example if you want to POST data:
     //    axios.post('/user', { firstName: 'Fred' })
